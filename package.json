@@ -6,7 +6,7 @@
     "start": "nodemon ./bin/www",
     "debug": "nodemon --inspect ./bin/www",
     "db:create": "createdb --echo aae_dev",
-    "db:drop":  "dropdb --echo aae_dev"
+    "db:drop": "dropdb --echo aae_dev"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -14,6 +14,7 @@
     "debug": "~2.6.3",
     "ejs": "~2.5.6",
     "express": "~4.15.2",
+    "faker": "^4.1.0",
     "morgan": "~1.8.1",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
