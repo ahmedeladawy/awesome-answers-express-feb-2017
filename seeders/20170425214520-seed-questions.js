@@ -29,7 +29,7 @@ const questions = Array
      // queryInterface is an object that has methods to directly
      //query our database skipping models
      //
-      return queryInterface.bulkDelete('Person', null, {});
+      return queryInterface.bulkDelete('Questions', null, {});
 
   }
 };
