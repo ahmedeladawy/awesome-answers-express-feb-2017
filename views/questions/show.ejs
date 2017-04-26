@@ -1,17 +1,27 @@
 <%- include('../partials/header') %>
 
-<a href="/questions">Back</a>
-<h1><%= question.title %></h1>
-<p><%= question.description %></p>
-<p><strong>Created at: </strong><%= question.createdAt %></p>
+  <a href="/questions">Back</a>
+  <h1><%= question.title %></h1>
+  <p><%= question.description %></p>
+  <p><strong>Created At:</strong> <%= question.createdAt %></p>
 
-<h2>Answers</h2>
+  <h2>Answers</h2>
 
-<form  action="/questions/<%= question.id %>/answers" method="post">
-  <div class="">
-    <textarea id= "content" name="content" rows="8" cols="80"></textarea>
-  </div>
-  <input type="submit" name="submit" value="Submit">
-</form>
+  <form action="/questions/<%= question.id %>/answers" method="post">
+    <div>
+      <textarea id="content" name="content"></textarea>
+    </div>
+
+    <input type="submit" name="submit" value="Submit"/>
+  </form>
+
+  <ul class="answers-list">
+    <% for (let answer of answers) { %>
+      <li>
+        <p><%= answer.content %></p>
+        <p><strong>Created At:</strong> <%= answer.createdAt %></p>
+      </li>
+    <% } %>
+  </ul>
 
 <%- include('../partials/footer') %>
