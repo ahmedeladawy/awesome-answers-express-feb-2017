@@ -12,7 +12,7 @@ const questions = Array
     return Question.create({
       title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
       description: faker.hacker.phrase()
-    })
+    }).catch(function(error) { console.log('Dublicate Questions!') })
   })
 
 
@@ -26,12 +26,10 @@ const questions = Array
     },
 
   down: function (queryInterface, Sequelize) {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
+     // queryInterface is an object that has methods to directly
+     //query our database skipping models
+     //
       return queryInterface.bulkDelete('Person', null, {});
-    */
+
   }
 };
