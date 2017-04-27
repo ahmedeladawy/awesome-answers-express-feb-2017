@@ -30,7 +30,7 @@ router.get('/new', function (req, res) {
 })
 
 // Questions#create URL: /questions VERB: POST
-router.post('/', function (req, res) {
+router.post('/', function (req, res, next) {
   // .body is a property of the request object that
   // contains all form data as a JavaScript object
   // res.send(req.body);
@@ -45,6 +45,47 @@ router.post('/', function (req, res) {
     .then(function (question) {
       res.redirect('/questions');
     })
+    .catch(function (err) {
+      next(err);
+    })
+})
+
+// Questions#destroy URL: /questions/:id VERB: DELETE
+router.delete('/:id', function (req, res) {
+  const id = req.params.id;
+
+  Question
+    .findById(id)
+    .then(function (question) { return question.destroy() })
+    .then(function() { res.redirect('/questions') });
+})
+
+// Questions#edit URL:  /questions/:id/edit VERB: GET
+router.get('/:id/edit', function (req, res) {
+  const id = req.params.id;
+
+  Question
+    .findById(id)
+    .then(function (question) {
+      res.render('questions/edit', {question: question})
+    })
+})
+
+// Questions#update URL: /questions/:id VERB: PATCH
+router.patch('/:id', function (req, res, next) {
+  const id = req.params.id;
+
+  Question
+    .findById(id)
+    .then(function (question) {
+      return question.update(
+        {title: req.body.title, description: req.body.description}
+      );
+    })
+    .then(function (question) {
+      res.redirect(`/questions/${id}`);
+    })
+    .catch(function (err) { next(err) })
 })
 
 // Questions#show URL: /questions/:id VERB: GET
@@ -75,18 +116,6 @@ router.use('/:questionId/answers', answers);
 
 module.exports = router;
 
-
-
-
-
-
-
-
-
-
-
-
-/* */
 
 
 
